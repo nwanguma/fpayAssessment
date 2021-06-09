@@ -1,0 +1,21 @@
+//navigation
+  //tabs
+  //toggle
+
+  //header display flex
+  //logo flex something
+  //tabs flex 1
+  //toggle flex something as well
+  //some margin between the tabs and the others
+
+  //tabs
+  //indicator and text
+
+  //form container
+  //form container heading
+  //form container small heading
+
+  //inputs
+  //dropdown which may or may not be select
+
+  //buttons - full & inverse
