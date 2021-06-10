@@ -13,7 +13,7 @@ rates courtesy the [fixer API](https//fixer.io) and then proceeds to enter the r
 
 ### Demo
 
-A working demo can be found [here](https://fliqpay-tochi.netlify.app)
+A working demo can be found [here](http://tranquil-profit.surge.sh/)
 
 The fixer free plan only allows for one base currency and has a monthly limit of 250 API calls
 
