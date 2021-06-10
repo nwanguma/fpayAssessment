@@ -1,4 +1,4 @@
-![fliqpay]("./src/assets/images/logo.svg")
+![fliqpay](./src/assets/images/logo.svg)
 
 ## Fliqpay Assessment
 
@@ -8,16 +8,16 @@ This project is part of the interviewing process for a Frontend role at Fliqpay.
 
 ### Description
 
-Project simulates the payout feature. A typical user enters an amount, specifies currencies, get exchange
-rates courtesy the [fixer API]('https//fixer.io') and then proceeds to enter the recipient's information.
+Project simulates the payout feature. A typical user enters an amount, specifies currencies, gets exchange
+rates courtesy the [fixer API](https//fixer.io) and then proceeds to enter the recipient's information.
 
 ### Demo
 
-A working demo can be found [here]('https://fliqpay-tochi.netlify.app')
+A working demo can be found [here](https://fliqpay-tochi.netlify.app)
 
 ### Doc
 
-Read the docs [here]('https://github.com/nwanguma/fpayassessment)
+Read the docs [here](https://github.com/nwanguma/fpayassessment)
 
 ### Stack
 
@@ -34,7 +34,7 @@ Read the docs [here]('https://github.com/nwanguma/fpayassessment)
 
 ### Project description
 
-This project was bootstrapped with [create-react-app](https://create-react-app.dev/docs/adding-typescript) and [tailwind]('https://tailwindcss.com/docs/guides/create-react-app').
+This project was bootstrapped with [create-react-app](https://create-react-app.dev/docs/adding-typescript) and [tailwind](https://tailwindcss.com/docs/guides/create-react-app).
 
 ## Getting Started
 
@@ -61,7 +61,7 @@ To install this project you need the following:
 1. To start the dev server, run
    `yarn start`
 
-This serves the project at [localhost]('http://localhost:3000')
+This serves the project at [localhost](http://localhost:3000)
 
 ### Build
 
@@ -70,7 +70,7 @@ This serves the project at [localhost]('http://localhost:3000')
 
 ### Test
 
-Test coverage is provided by [jest]('https://jestjs.io/docs/tutorial-react') and [react testing library]('https://testing-library.com/docs/react-testing-library/intro/').
+Test coverage is provided by [jest](https://jestjs.io/docs/tutorial-react) and [react testing library](https://testing-library.com/docs/react-testing-library/intro/).
 
 1. To run tests
    `yarn test`
@@ -79,6 +79,6 @@ Test coverage is provided by [jest]('https://jestjs.io/docs/tutorial-react') and
 
 _This is not recommended_
 
-[Do not eject]('https://medium.com/curated-by-versett/dont-eject-your-create-react-app-b123c5247741')
+[Do not eject](https://medium.com/curated-by-versett/dont-eject-your-create-react-app-b123c5247741)
 
 `yarn eject`
