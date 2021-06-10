@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipientDetails <RecipientDetails /> matches snapshot 1`] = `
+<div>
+  <div
+    class="card"
+    data-testid="card"
+  >
+    <div
+      class="container mb-5"
+    >
+      <h3
+        class="card-heading__primary"
+      >
+        Your Recipient
+      </h3>
+      <p
+        class="card-heading__secondary"
+      >
+        Who are you sending money to?
+      </p>
+    </div>
+    <form
+      autocomplete="off"
+    >
+      <div
+        class="container relative h-[65px]"
+      >
+        <label
+          class="label text-[13px] top-2"
+          for="amount"
+        >
+          Their email (optional)
+        </label>
+        <input
+          autocomplete="user-mail"
+          class="border-white-border-alt input h-[45px] py-3 px-[15px] text-grey-light"
+          data-testid="user-mail"
+          name="mail"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="container relative h-[65px] mt-4"
+      >
+        <label
+          class="label text-[13px] top-2"
+          for="amount"
+        >
+          Full name of the account holder
+        </label>
+        <input
+          autocomplete="user-full"
+          class="border-white-border-alt input h-[45px] py-3 px-[15px] text-grey-light"
+          data-testid="user-full"
+          name="fullname"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="container mt-5"
+      >
+        <h3
+          class="py-3 border-solid font-medium border-b border-white-border mb-5 text-sm leading-6 text-blue-text not-italic"
+        >
+          Bank Details
+        </h3>
+        <div
+          class="flex"
+        >
+          <p
+            class="px-2 sm:px-6 text-[13px] sm:text-base cursor-pointer  border-blue-tab font-medium  border-b-2 border-solid text-blue-tab pb-3"
+          >
+            Inside Europe
+          </p>
+          <p
+            class="px-2 sm:px-6 text-[13px] sm:text-base cursor-pointer text-grey-label pb-3"
+          >
+            Outside Europe
+          </p>
+        </div>
+        <div
+          class="container relative h-[65px] mt-4"
+        >
+          <label
+            class="label text-[13px] top-2"
+            for="swiftCode"
+          >
+            IBAN
+          </label>
+          <input
+            class="border-white-border-alt input h-[45px] py-3 px-[15px] text-grey-light"
+            data-testid="account-number"
+            name="accountNumber"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="container mt-8 flex justify-between"
+      >
+        <button
+          class="btn w-[100%] text-white-main bg-blue-tab"
+        >
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

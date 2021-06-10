@@ -163,12 +163,7 @@ const Payout: React.FC = () => {
                 handleProceed={handleProceed}
               />
             ),
-            3: (
-              <PayoutConfirmation
-                payoutDetails={payoutDetails}
-                handleSubmit={handleSubmit}
-              />
-            ),
+            3: <PayoutConfirmation payoutDetails={payoutDetails} />,
           }[status]
         }
       </div>

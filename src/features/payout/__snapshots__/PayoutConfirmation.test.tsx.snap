@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PayoutConfirmation <PayoutConfirmation /> matches snapshot 1`] = `
+<div>
+  <div
+    class="card"
+    data-testid="card"
+  >
+    <div
+      class="container"
+    >
+      <h3
+        class="card-heading__primary"
+      >
+        Review details of your transfer
+      </h3>
+      <div
+        class="container py-3 border-solid border-b border-white-border"
+      >
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            You send
+          </p>
+          <p
+            class="text-right text-[16px] font-medium text-grey-medium"
+          >
+            657
+             
+            EUR
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Total fees (included)
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            6.65
+             
+            EUR
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Amount we’ll convert
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            300
+             
+            EUR
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Guaranteed rate
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            30
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Will
+             gets
+          </p>
+          <p
+            class="text-right text-[16px] font-medium text-grey-medium"
+          >
+            509
+             
+            NGN
+          </p>
+        </div>
+      </div>
+      <div
+        class="container py-3 border-solid border-b border-white-border"
+      >
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Name
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            Will Tybur
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            Email address
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            willthemantybur@hotmail.com
+          </p>
+        </div>
+        <div
+          class="container flex flex-col md:flex-row justify-between py-2 px-1"
+        >
+          <p
+            class="text-[13px] text-grey-label"
+          >
+            IBAN / Account number
+          </p>
+          <p
+            class="text-right text-[13px] text-grey-medium"
+          >
+            67679767676
+          </p>
+        </div>
+      </div>
+      <button
+        class="btn w-[100%] text-white-main bg-green-button"
+      >
+        Confirm and continue
+      </button>
+    </div>
+  </div>
+</div>
+`;

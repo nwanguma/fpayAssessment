@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Glitch <Glitch /> matches snapshot 1`] = `
+<div>
+  <div
+    class="wrapper"
+    data-testid="wrapper"
+  >
+    <header
+      class="header--payout w-[100%] md:w-[90%] mx-auto flex items-center py-6 justify-between"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="fliqpay"
+          src="logo.svg"
+        />
+      </a>
+    </header>
+    <main
+      class="container min-h-[80vh] min-w-full flex items-center"
+    >
+      <div
+        class="container flex flex-col-reverse  md:flex-row justify-center md:justify-between items-center max-w-[400px] md:text-left md:max-w-[80%] mx-auto"
+      >
+        <div
+          class="container mt-3 flex-item w-[90%] text-center md:text-left"
+        >
+          <div
+            class="container"
+            data-testid="container"
+          >
+            <h2
+              class="text-[72px] leading-[90px] text-grey-large font-black"
+            >
+              500
+            </h2>
+            <h3
+              class="mt-1 md:mt-3 text-[24px] leading-[30px] text-blue-black font-bold"
+            >
+              There’s been a glitch…
+            </h3>
+            <p
+              class="mt-2 md:mt-3 text-[16px] leading-[24px] text-grey-text"
+            >
+              An error has occurred and we’re working to fix the problem! We’ll be up and running shortly
+            </p>
+            <a
+              class="flex items-center mx-auto md:-mx-0 justify-center leading-[40px] h-[40px] w-[172px] bg-blue-tab text-white-main btn mt-8"
+              href="/"
+            >
+              Refresh Page
+            </a>
+          </div>
+        </div>
+        <div
+          class="container mx-auto md:mx-0 w-[250px] h-[150px] md:w-[350px] md:h-[250px]"
+        >
+          <img
+            alt="error pic"
+            class="w-[100%] h-[100%]"
+            src="503.png"
+          />
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;

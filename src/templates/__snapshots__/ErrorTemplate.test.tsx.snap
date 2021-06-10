@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorTemplate <ErrorTemplate /> matches snapshot 1`] = `
+<div>
+  <div
+    class="wrapper"
+    data-testid="wrapper"
+  >
+    <header
+      class="header--payout w-[100%] md:w-[90%] mx-auto flex items-center py-6 justify-between"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="fliqpay"
+          src="logo.svg"
+        />
+      </a>
+    </header>
+    <main
+      class="container min-h-[80vh] min-w-full flex items-center"
+    >
+      <div
+        class="container flex flex-col-reverse  md:flex-row justify-center md:justify-between items-center max-w-[400px] md:text-left md:max-w-[80%] mx-auto"
+      >
+        <div
+          class="container mt-3 flex-item w-[90%] text-center md:text-left"
+        >
+          <div>
+            Test
+          </div>
+        </div>
+        <div
+          class="container mx-auto md:mx-0 w-[250px] h-[150px] md:w-[350px] md:h-[250px]"
+        >
+          <img
+            alt="error pic"
+            class="w-[100%] h-[100%]"
+            src="503.png"
+          />
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;

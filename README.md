@@ -15,6 +15,8 @@ rates courtesy the [fixer API](https//fixer.io) and then proceeds to enter the r
 
 A working demo can be found [here](https://fliqpay-tochi.netlify.app)
 
+The fixer free plan only allows for one base currency and has a monthly limit of 250 API calls
+
 ### Doc
 
 Read the docs [here](https://github.com/nwanguma/fpayassessment)
@@ -47,6 +49,12 @@ To install this project you need the following:
    `npm install yarn -g`
 
 2. A code editor
+
+3. Please install the stylelint extension, the src already includes the stylelint module and config file. For more information on why this is neccessary please read this [issue](https://github.com/tailwindlabs/discuss/issues/111)
+
+4. Sign up for a free API key on [fixer](https://fixer.io)
+
+5. Create env variable with the format REACT_APP_FIXER_API_KEY=yourapikey
 
 ### Installation
 
@@ -82,3 +90,19 @@ _This is not recommended_
 [Do not eject](https://medium.com/curated-by-versett/dont-eject-your-create-react-app-b123c5247741)
 
 `yarn eject`
+
+### Assumptions
+
+I let the UI guide my work, I tried to make the app as real world as possible by adding input validation and type checking.
+
+### Submission
+
+This submission adheres to the requirements, I didn't manage to add e2e testing with Cypress because of time.
+
+### Issues
+
+None
+
+### Constructive Feedback
+
+I have none, this assessment is perfect.

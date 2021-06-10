@@ -1,4 +1,4 @@
-export interface Error {
+export interface ValidationError {
   [key: string]: {
     text: string;
     error: boolean;
@@ -8,8 +8,8 @@ export interface Error {
 const validateFormData = (
   formData: { [key: string]: string },
   properties: string[]
-): Error => {
-  let errors: Error = {};
+): ValidationError => {
+  let errors: ValidationError = {};
 
   properties.forEach((property: string) => {
     if (

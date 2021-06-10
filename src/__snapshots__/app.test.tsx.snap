@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App <App /> matches snapshot 1`] = `
+<div>
+  <div
+    class="wrapper"
+  >
+    <header
+      class="header--payout"
+    >
+      <div
+        class="container w-[100%] md:w-[75%] mx-auto flex items-center py-6 justify-between"
+      >
+        <a
+          href="/"
+        >
+          <img
+            alt="fliqpay"
+            class="w-15 sm:w-20"
+            src="logo.svg"
+          />
+        </a>
+        <div
+          class="flex-1 mx-[5%] sm:mx-[5%] md:mx-[15%]"
+        >
+          <div
+            class="bg-white-detail mx-auto w-[76%] h-[2px]"
+          >
+            <div
+              class="w-[0px] h-[2px] progress-bar"
+            />
+          </div>
+          <div
+            class="payout-steps"
+          >
+            <div
+              class="payout-steps__tab"
+            >
+              <span
+                class="payout-steps__tab__indicator"
+              />
+              <span
+                class="payout-steps__tab__text--active"
+              >
+                Amount
+              </span>
+            </div>
+            <div
+              class="payout-steps__tab "
+            >
+              <span
+                class="hidden"
+              />
+              <span
+                class="payout-steps__tab__text"
+              >
+                Recipient
+              </span>
+            </div>
+            <div
+              class="payout-steps__tab "
+            >
+              <span
+                class="hidden"
+              />
+              <span
+                class="payout-steps__tab__text"
+              >
+                Review
+              </span>
+            </div>
+            <div
+              class="payout-steps__tab "
+            >
+              <span
+                class="hidden"
+              />
+              <span
+                class="payout-steps__tab__text"
+              >
+                Pay
+              </span>
+            </div>
+          </div>
+        </div>
+        <img
+          alt="toggle"
+          src="button.svg"
+        />
+      </div>
+    </header>
+    <div
+      class="card"
+      data-testid="card"
+    >
+      <div
+        class="container mb-5"
+      >
+        <h3
+          class="card-heading__primary"
+        >
+          One-time Payout
+        </h3>
+        <p
+          class="card-heading__secondary"
+        >
+          Send money internationally
+        </p>
+      </div>
+      <form
+        autocomplete="off"
+      >
+        <div
+          class="container mb-2 relative h-[65px]"
+        >
+          <label
+            class="label--inset"
+            for="userAmount"
+          >
+            You send
+          </label>
+          <input
+            class="border-white-border-alt input h-[65px] pl-4 py-3 pt-7 pr-[100px] sm:pr-[140px] text-blue-text"
+            data-testid="user-amount"
+            name="userAmount"
+            type="text"
+          />
+          <ul
+            class="dropdown__container"
+          >
+            <li
+              aria-labelledby="dropdown-label"
+              class="dropdown__toggle"
+              data-id="baseCurrency"
+              role="button"
+            >
+              <img
+                alt="country flag"
+                class="dropdown__list__item__image"
+                src="eur.svg"
+              />
+              <span
+                class="dropdown__list__item__text"
+              >
+                EUR
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="container relative h-[65px]"
+        >
+          <label
+            class="label--inset"
+            for="amount"
+          >
+            Recipient gets
+          </label>
+          <input
+            class="border-white-border-alt input h-[65px] pl-4 py-3 pt-7 pr-[100px] sm:pr-[140px] text-blue-text"
+            data-testid="converted-amount"
+            disabled=""
+            name="convertedAmount"
+            type="text"
+            value=""
+          />
+          <ul
+            class="dropdown__container"
+          >
+            <li
+              aria-labelledby="dropdown-label"
+              class="dropdown__toggle"
+              data-id="targetCurrency"
+              role="button"
+            >
+              <img
+                alt="country flag"
+                class="dropdown__list__item__image"
+                src="ngr.svg"
+              />
+              <span
+                class="dropdown__list__item__text"
+              >
+                NGN
+              </span>
+            </li>
+            <li
+              class="h-0 overflow-hidden container"
+              role="list"
+            >
+              <ul
+                class=" hidden overflow-hidden"
+              >
+                <li
+                  class="dropdown__list__item"
+                  data-id="targetCurrency"
+                  data-name="USD"
+                >
+                  <img
+                    alt="country flag"
+                    class="dropdown__list__item__image"
+                    src="usd.svg"
+                  />
+                  <span
+                    class="dropdown__list__item__text"
+                  >
+                    USD
+                  </span>
+                </li>
+                <li
+                  class="dropdown__list__item"
+                  data-id="targetCurrency"
+                  data-name="EUR"
+                >
+                  <img
+                    alt="country flag"
+                    class="dropdown__list__item__image"
+                    src="eur.svg"
+                  />
+                  <span
+                    class="dropdown__list__item__text"
+                  >
+                    EUR
+                  </span>
+                </li>
+                <li
+                  class="dropdown__list__item"
+                  data-id="targetCurrency"
+                  data-name="NGN"
+                >
+                  <img
+                    alt="country flag"
+                    class="dropdown__list__item__image"
+                    src="ngr.svg"
+                  />
+                  <span
+                    class="dropdown__list__item__text"
+                  >
+                    NGN
+                  </span>
+                </li>
+                <li
+                  class="dropdown__list__item"
+                  data-id="targetCurrency"
+                  data-name="GBP"
+                >
+                  <img
+                    alt="country flag"
+                    class="dropdown__list__item__image"
+                    src="gbr.svg"
+                  />
+                  <span
+                    class="dropdown__list__item__text"
+                  >
+                    GBP
+                  </span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="container mt-8 flex justify-between"
+        >
+          <button
+            class="btn w-[48%] sm:w-[210.71px] border-blue-button border-solid border text-blue-button"
+          >
+            Compare rates
+          </button>
+          <button
+            class="btn w-[48%] sm:w-[210.71px] text-white-main bg-blue-button"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

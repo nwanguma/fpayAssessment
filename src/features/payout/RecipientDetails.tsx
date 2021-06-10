@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import validateFormData, { Error } from "../../validation/validateFormData";
+import validateFormData, {
+  ValidationError,
+} from "../../validation/validateFormData";
 import { Event, SubmitEvent, ToggleData } from "./payout";
 import { State } from "./payout-reducer";
 
@@ -44,7 +46,7 @@ const Amount: React.FC<IProps> = ({
   handleOnChange,
   handleProceed,
 }) => {
-  const [validationErrors, setValidationErrors] = useState<Error>({});
+  const [validationErrors, setValidationErrors] = useState<ValidationError>({});
   const [recipientRegion, setRecipientRegion] = useState(1);
 
   const handleRegionChange = (id: number): void => {
@@ -76,7 +78,7 @@ const Amount: React.FC<IProps> = ({
   };
 
   return (
-    <div className="card">
+    <div className="card" data-testid="card">
       <div className="container mb-5">
         <h3 className="card-heading__primary">Your Recipient</h3>
         <p className="card-heading__secondary">Who are you sending money to?</p>
@@ -89,7 +91,8 @@ const Amount: React.FC<IProps> = ({
           <input
             name="mail"
             value={payoutDetails.mail}
-            autoComplete="user-address"
+            data-testid="user-mail"
+            autoComplete="user-mail"
             onChange={handleOnChange}
             type="text"
             className={classes.input(
@@ -104,6 +107,7 @@ const Amount: React.FC<IProps> = ({
           <input
             name="fullname"
             autoComplete="user-full"
+            data-testid="user-full"
             value={payoutDetails.fullname}
             onChange={handleOnChange}
             type="text"
@@ -135,6 +139,7 @@ const Amount: React.FC<IProps> = ({
               </label>
               <input
                 name="swiftCode"
+                data-testid="swift-code"
                 value={payoutDetails.swiftCode}
                 onChange={handleOnChange}
                 type="text"
@@ -150,6 +155,7 @@ const Amount: React.FC<IProps> = ({
             </label>
             <input
               name="accountNumber"
+              data-testid="account-number"
               value={payoutDetails.accountNumber}
               onChange={handleOnChange}
               type="text"

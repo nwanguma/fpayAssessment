@@ -7,7 +7,7 @@ import notFound from "../assets/images/404.png";
 const NotFound: React.FC = () => {
   return (
     <ErrorTemplate image={notFound}>
-      <div className="container">
+      <div className="container" data-testid="container">
         <h2 className="text-[72px] leading-[90px] text-grey-large font-black">
           404
         </h2>

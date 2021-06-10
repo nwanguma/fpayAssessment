@@ -2,7 +2,6 @@ import { State } from "./payout-reducer";
 
 interface IProps {
   payoutDetails: State;
-  handleSubmit: () => void;
 }
 
 interface Classes {
@@ -23,9 +22,9 @@ const classes: Classes = {
   btn: "btn w-[100%] text-white-main bg-green-button",
 };
 
-const Confirmation: React.FC<IProps> = ({ payoutDetails, handleSubmit }) => {
+const Confirmation: React.FC<IProps> = ({ payoutDetails }) => {
   return (
-    <div className="card">
+    <div className="card" data-testid="card">
       <div className="container">
         <h3 className="card-heading__primary">
           Review details of your transfer

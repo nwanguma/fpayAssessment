@@ -10,7 +10,7 @@ import email from "../assets/images/EnvelopeSimple.svg";
 const Unavailable: React.FC = () => {
   return (
     <ErrorTemplate image={notFound}>
-      <div className="container">
+      <div className="container" data-testid="container">
         <h2 className="text-[72px] leading-[90px] text-grey-large font-black">
           503
         </h2>

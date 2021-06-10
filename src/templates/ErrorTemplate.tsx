@@ -9,7 +9,7 @@ interface IProps {
 
 const ErrorTemplate: React.FC<IProps> = ({ children, image }) => {
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-testid="wrapper">
       <header className="header--payout w-[100%] md:w-[90%] mx-auto flex items-center py-6 justify-between">
         <Link to="/">
           <img src={logo} alt="fliqpay" />

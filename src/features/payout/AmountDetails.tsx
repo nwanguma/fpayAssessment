@@ -2,7 +2,9 @@ import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
 
-import validateFormData, { Error } from "../../validation/validateFormData";
+import validateFormData, {
+  ValidationError,
+} from "../../validation/validateFormData";
 import { GET_FIXER_LATEST_RATE } from "../../utils/constants";
 import { Event, SubmitEvent, ToggleData } from "./payout";
 import { State } from "./payout-reducer";
@@ -55,7 +57,7 @@ const Amount: React.FC<IProps> = ({
   handleCurrencyToggle,
   handleProceed,
 }) => {
-  const [validationErrors, setValidationErrors] = useState<Error>({});
+  const [validationErrors, setValidationErrors] = useState<ValidationError>({});
   const [toggleBaseCurrencyDropdown, setToggleBaseCurrencyDropdown] =
     useState(false);
   const [toggleTargetCurrencyDropdown, setToggleTargetCurrencyDropdown] =
@@ -170,6 +172,8 @@ const Amount: React.FC<IProps> = ({
 
       const rates = res.data.rates;
 
+      if (!rates) throw new Error();
+
       if (typeof rates === "object" && Object.keys(rates).length > 0) {
         formatRates(rates);
       }
@@ -181,7 +185,8 @@ const Amount: React.FC<IProps> = ({
         },
       });
     } catch (e) {
-      // console.log(e);
+      //I'm not sure how best to go about this
+      //I'd ideally show some sort of service unavailable modal or toast
     }
   };
 
@@ -278,7 +283,7 @@ const Amount: React.FC<IProps> = ({
   };
 
   return (
-    <div className="card">
+    <div className="card" data-testid="card">
       <div className="container mb-5">
         <h3 className="card-heading__primary">One-time Payout</h3>
         <p className="card-heading__secondary">Send money internationally</p>
@@ -290,6 +295,7 @@ const Amount: React.FC<IProps> = ({
           </label>
           <input
             name="userAmount"
+            data-testid="user-amount"
             type="text"
             onChange={(e) => {
               if (isNaN(parseInt(e.target.value))) {
@@ -407,6 +413,7 @@ const Amount: React.FC<IProps> = ({
           <input
             name="convertedAmount"
             type="text"
+            data-testid="converted-amount"
             value={payoutDetails.convertedAmount}
             disabled
             className={classes.input(
@@ -521,7 +528,7 @@ const Amount: React.FC<IProps> = ({
           </ul>
         </div>
         <div className="container mt-8 flex justify-between">
-          <button className={classes.btnInverse}>Compate rates</button>
+          <button className={classes.btnInverse}>Compare rates</button>
           <button className={classes.btn}>Continue</button>
         </div>
       </form>
