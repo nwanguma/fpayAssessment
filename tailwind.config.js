@@ -25,12 +25,14 @@ module.exports = {
         button: "#A98CF6",
         bold: "#372271",
         tab: "#4305EB",
+        black: "#1F026B",
       },
       grey: {
         light: "#C4C5C6",
         text: "#877E9E",
         label: "#8B8F96",
         medium: "#404040",
+        large: "#A49DB6",
       },
       green: {
         button: "#6FAE75",

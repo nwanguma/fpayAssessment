@@ -103,7 +103,7 @@ const Amount: React.FC<IProps> = ({
           </label>
           <input
             name="fullname"
-            autoComplete="user-fullname"
+            autoComplete="user-full"
             value={payoutDetails.fullname}
             onChange={handleOnChange}
             type="text"

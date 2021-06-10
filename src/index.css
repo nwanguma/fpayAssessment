@@ -163,3 +163,7 @@ input[type="number"] {
   @apply text-[13px] sm:text-base rounded-md h-[50px] text-center;
   outline: 0 !important;
 }
+
+.flex-item {
+  flex: 0 0 40%;
+}

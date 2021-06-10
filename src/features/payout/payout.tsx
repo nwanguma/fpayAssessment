@@ -1,4 +1,7 @@
 import { useState, useReducer } from "react";
+import { Link } from "react-router-dom";
+
+import ErrorBoundary from "../../templates/ErrorBoundaries";
 
 import payoutReducer, { initialState } from "./payout-reducer";
 
@@ -94,76 +97,82 @@ const Payout: React.FC = () => {
   };
 
   return (
-    <div className="wrapper">
-      <header className="header--payout">
-        <div className={classes["header-content"]}>
-          <img className="w-15 sm:w-20" src={logo} alt="fliqpay" />
-          <div className={classes.steps}>
-            <div className={classes["progress-bar"]}>
-              <div className={classes.indicator(status)}></div>
+    <ErrorBoundary>
+      <div className="wrapper">
+        <header className="header--payout">
+          <div className={classes["header-content"]}>
+            <Link to="/">
+              <img className="w-15 sm:w-20" src={logo} alt="fliqpay" />
+            </Link>
+            <div className={classes.steps}>
+              <div className={classes["progress-bar"]}>
+                <div className={classes.indicator(status)}></div>
+              </div>
+              <div className="payout-steps">
+                <div className="payout-steps__tab">
+                  <span
+                    className={classes.payoutStepsIndicator(status, 1)}
+                  ></span>
+                  <span className={classes.payoutStepsText(status, 1)}>
+                    Amount
+                  </span>
+                </div>
+                <div className="payout-steps__tab ">
+                  <span
+                    className={classes.payoutStepsIndicator(status, 2)}
+                  ></span>
+                  <span className={classes.payoutStepsText(status, 2)}>
+                    Recipient
+                  </span>
+                </div>
+                <div className="payout-steps__tab ">
+                  <span
+                    className={classes.payoutStepsIndicator(status, 3)}
+                  ></span>
+                  <span className={classes.payoutStepsText(status, 3)}>
+                    Review
+                  </span>
+                </div>
+                <div className="payout-steps__tab ">
+                  <span
+                    className={classes.payoutStepsIndicator(status, 4)}
+                  ></span>
+                  <span className={classes.payoutStepsText(status, 4)}>
+                    Pay
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="payout-steps">
-              <div className="payout-steps__tab">
-                <span
-                  className={classes.payoutStepsIndicator(status, 1)}
-                ></span>
-                <span className={classes.payoutStepsText(status, 1)}>
-                  Amount
-                </span>
-              </div>
-              <div className="payout-steps__tab ">
-                <span
-                  className={classes.payoutStepsIndicator(status, 2)}
-                ></span>
-                <span className={classes.payoutStepsText(status, 2)}>
-                  Recipient
-                </span>
-              </div>
-              <div className="payout-steps__tab ">
-                <span
-                  className={classes.payoutStepsIndicator(status, 3)}
-                ></span>
-                <span className={classes.payoutStepsText(status, 3)}>
-                  Review
-                </span>
-              </div>
-              <div className="payout-steps__tab ">
-                <span
-                  className={classes.payoutStepsIndicator(status, 4)}
-                ></span>
-                <span className={classes.payoutStepsText(status, 4)}>Pay</span>
-              </div>
-            </div>
+            <img src={button} alt="toggle" />
           </div>
-          <img src={button} alt="toggle" />
-        </div>
-      </header>
-      {
+        </header>
         {
-          1: (
-            <AmountDetails
-              payoutDetails={payoutDetails}
-              handleOnChange={handleOnChange}
-              handleCurrencyToggle={handleCurrencyToggle}
-              handleProceed={handleProceed}
-            />
-          ),
-          2: (
-            <RecipientDetails
-              payoutDetails={payoutDetails}
-              handleOnChange={handleOnChange}
-              handleProceed={handleProceed}
-            />
-          ),
-          3: (
-            <PayoutConfirmation
-              payoutDetails={payoutDetails}
-              handleSubmit={handleSubmit}
-            />
-          ),
-        }[status]
-      }
-    </div>
+          {
+            1: (
+              <AmountDetails
+                payoutDetails={payoutDetails}
+                handleOnChange={handleOnChange}
+                handleCurrencyToggle={handleCurrencyToggle}
+                handleProceed={handleProceed}
+              />
+            ),
+            2: (
+              <RecipientDetails
+                payoutDetails={payoutDetails}
+                handleOnChange={handleOnChange}
+                handleProceed={handleProceed}
+              />
+            ),
+            3: (
+              <PayoutConfirmation
+                payoutDetails={payoutDetails}
+                handleSubmit={handleSubmit}
+              />
+            ),
+          }[status]
+        }
+      </div>
+    </ErrorBoundary>
   );
 };
 
