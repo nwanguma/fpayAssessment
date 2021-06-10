@@ -1,8 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash";
 
+import validateFormData, { Error } from "../../validation/validateFormData";
 import { GET_FIXER_LATEST_RATE } from "../../utils/constants";
+import { Event, SubmitEvent, ToggleData } from "./payout";
+import { State } from "./payout-reducer";
 
 import mapCurrencyToFlag from "./mapCurrencyToFlag";
 
@@ -13,60 +16,70 @@ import usd from "../../assets/images/usd.svg";
 
 import formatCurrency from "../../utils/formatCurrency";
 
-const classes = {
-  formGroup: (completedConversion) =>
+interface IProps {
+  payoutDetails: State;
+  handleOnChange: (e: Event) => void;
+  handleCurrencyToggle: (data: ToggleData) => void;
+  handleProceed: () => void;
+}
+
+interface Classes {
+  formGroup: (completedConversion: boolean) => string;
+  input: (error: boolean) => string;
+  dropdownList: (dropdown: boolean) => string;
+  dropdownListItem: (dropdown: boolean) => string;
+  btn: string;
+  btnInverse: string;
+}
+
+const classes: Classes = {
+  formGroup: (completedConversion: boolean): string =>
     `container ${completedConversion ? "" : "mb-2"} relative h-[65px]`,
-  input:
-    "input h-[65px] pl-4 py-3 pt-7 pr-[100px] sm:pr-[140px] text-custom-text-blue",
-  dropdownList: (dropdown) =>
+  input: (error: boolean): string =>
+    `${
+      error ? "border-red-error" : "border-white-border-alt"
+    } input h-[65px] pl-4 py-3 pt-7 pr-[100px] sm:pr-[140px] text-blue-text`,
+  dropdownList: (dropdown: boolean): string =>
     `${dropdown ? "min-h-[65px]" : "h-0 overflow-hidden"} container`,
-  dropdownListItem: (dropdown) =>
+  dropdownListItem: (dropdown: boolean): string =>
     ` ${dropdown ? "dropdown__list" : "hidden overflow-hidden"}`,
 
-  btn: "btn w-[48%] sm:w-[210.71px] text-custom-text-white bg-custom-bg-button",
+  btn: "btn w-[48%] sm:w-[210.71px] text-white-main bg-blue-button",
   btnInverse:
-    "btn w-[48%] sm:w-[210.71px] border-custom-bg-button border-solid border text-custom-text-button",
+    "btn w-[48%] sm:w-[210.71px] border-blue-button border-solid border text-blue-button",
 };
 
-const Amount = ({
+const Amount: React.FC<IProps> = ({
   payoutDetails,
   handleOnChange,
   handleCurrencyToggle,
   handleProceed,
 }) => {
+  const [validationErrors, setValidationErrors] = useState<Error>({});
   const [toggleBaseCurrencyDropdown, setToggleBaseCurrencyDropdown] =
-    useState("");
+    useState(false);
   const [toggleTargetCurrencyDropdown, setToggleTargetCurrencyDropdown] =
-    useState("");
+    useState(false);
 
   useEffect(() => {
     const { feeRate, userAmount } = payoutDetails;
+    const userAmountToNumber = +userAmount;
 
-    const fee = calculateFee(feeRate, userAmount);
+    const fee = calculateFee(feeRate, userAmountToNumber);
 
     handleOnChange({
       target: {
         name: "fee",
-        value: fee,
+        value: formatCurrency(fee),
       },
     });
   }, [payoutDetails.userAmount]);
 
   useEffect(() => {
     const { fee, userAmount } = payoutDetails;
+    const userAmountToNumber = +userAmount;
 
-    if (fee) {
-      const amountMinusFee = calculatePayable(fee, userAmount);
-
-      handleOnChange({
-        target: {
-          name: "amountMinusFee",
-          value: amountMinusFee,
-        },
-      });
-    }
-
-    const amountMinusFee = calculatePayable(fee, userAmount);
+    const amountMinusFee = calculatePayable(fee, userAmountToNumber);
 
     handleOnChange({
       target: {
@@ -141,15 +154,15 @@ const Amount = ({
     };
   }, [payoutDetails.amountMinusFee, payoutDetails.rate]);
 
-  const calculateFee = (feeRate, userAmount) => {
+  const calculateFee = (feeRate: number, userAmount: number): number => {
     return feeRate * userAmount;
   };
 
-  const calculatePayable = (fee, userAmount) => {
+  const calculatePayable = (fee: number, userAmount: number): number => {
     return userAmount - fee;
   };
 
-  const getCurrentRate = async (baseCurrency) => {
+  const getCurrentRate = async (baseCurrency: string) => {
     try {
       const res = await axios.get(
         `${GET_FIXER_LATEST_RATE}?access_key=${process.env.REACT_APP_FIXER_API_KEY}&base=${baseCurrency}&symbols=EUR,NGN,GBP,USD`
@@ -168,19 +181,22 @@ const Amount = ({
         },
       });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 
-  const formatRates = (rates) => {
-    const ratesKeys = Object.keys(rates);
+  const formatRates = (rates: { [key: string]: string }): void => {
+    const ratesKeys: string[] = Object.keys(rates);
 
-    return ratesKeys.forEach((key) => {
+    return ratesKeys.forEach((key: string): void => {
       rates[key] = formatCurrency(rates[key]);
     });
   };
 
-  const getRate = (rates, currency) => {
+  const getRate = (
+    rates: { [key: string]: string },
+    currency: string
+  ): void => {
     const rate = rates[currency];
 
     handleOnChange({
@@ -191,27 +207,30 @@ const Amount = ({
     });
   };
 
-  const convertCurrencies = (payable, rate) => {
-    return payable * rate;
+  const convertCurrencies = (payable: number, rate: number): string => {
+    return `${formatCurrency(payable * rate)}`;
   };
 
+  /* This batches the amount input's events into one single event
+    and fires off after 5000ms 
+  */
   const debounceFunc = useCallback(
-    debounce((e) => handleOnChange(e), 5000),
+    debounce((e: Event) => handleOnChange(e), 5000),
     []
   );
 
-  const handleChangeWithDebounce = (e) => {
+  const handleChangeWithDebounce = (e: Event) => {
     debounceFunc(e);
   };
 
-  const handleToggleBaseCurrency = ({ target }) => {
+  const handleToggleBaseCurrency = (): void => {
     if (toggleBaseCurrencyDropdown)
       setToggleBaseCurrencyDropdown(!toggleBaseCurrencyDropdown);
 
     if (!toggleBaseCurrencyDropdown) setToggleBaseCurrencyDropdown(true);
   };
 
-  const handleToggleTargetCurrency = ({ target }) => {
+  const handleToggleTargetCurrency = (): void => {
     if (toggleTargetCurrencyDropdown)
       setToggleTargetCurrencyDropdown(!toggleTargetCurrencyDropdown);
 
@@ -228,14 +247,35 @@ const Amount = ({
     convertedAmount,
   } = payoutDetails;
 
-  const completedConversion =
+  const completedConversion = !!(
     userAmount &&
     targetCurrency &&
     fee &&
     amountMinusFee &&
     Object.keys(rates).length > 0 &&
     rate &&
-    convertedAmount;
+    convertedAmount
+  );
+
+  const handleSubmit = (e: SubmitEvent): void => {
+    e.preventDefault();
+
+    const { userAmount, convertedAmount } = payoutDetails;
+
+    const formState = {
+      userAmount,
+      convertedAmount,
+    };
+
+    const keys = Object.keys(formState);
+    const errors = validateFormData(formState, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    handleProceed();
+  };
 
   return (
     <div className="card">
@@ -243,7 +283,7 @@ const Amount = ({
         <h3 className="card-heading__primary">One-time Payout</h3>
         <p className="card-heading__secondary">Send money internationally</p>
       </div>
-      <form onSubmit={handleProceed} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className={classes.formGroup(completedConversion)}>
           <label htmlFor="userAmount" className="label--inset">
             You send
@@ -251,8 +291,23 @@ const Amount = ({
           <input
             name="userAmount"
             type="text"
-            onChange={handleChangeWithDebounce}
-            className={classes.input}
+            onChange={(e) => {
+              if (isNaN(parseInt(e.target.value))) {
+                setValidationErrors({
+                  userAmount: {
+                    error: true,
+                    text: "userAmount is invalid",
+                  },
+                });
+              } else {
+                delete validationErrors.userAmount;
+
+                handleChangeWithDebounce(e);
+              }
+            }}
+            className={classes.input(
+              validationErrors.userAmount && validationErrors.userAmount.error
+            )}
           ></input>
           <ul className="dropdown__container">
             <li
@@ -260,7 +315,7 @@ const Amount = ({
               aria-labelledby="dropdown-label"
               className="dropdown__toggle"
               data-id="baseCurrency"
-              onClick={handleToggleBaseCurrency}
+              onClick={() => handleToggleBaseCurrency()}
             >
               <img
                 className="dropdown__list__item__image"
@@ -271,7 +326,8 @@ const Amount = ({
                 {payoutDetails.baseCurrency}
               </span>
             </li>
-            <li
+            {/* The fixer free plan's latest rates endpoint only allows for one base currency */}
+            {/* <li
               role="list"
               className={classes.dropdownList(toggleBaseCurrencyDropdown)}
             >
@@ -284,7 +340,7 @@ const Amount = ({
                       id: "baseCurrency",
                       name: "EUR",
                     });
-                    handleToggleBaseCurrency(e);
+                    handleToggleBaseCurrency();
                   }}
                   className="dropdown__list__item"
                   data-id="baseCurrency"
@@ -298,46 +354,46 @@ const Amount = ({
                   <span className="dropdown__list__item__text">EUR</span>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
         {completedConversion && (
           <div className="container">
             <div className="container pl-[18px]">
-              <div className="flex py-[10px] border-l-2 border-solid border-custom-bg-span">
-                <span className="relative right-[11px] leading-[20px] inline-block w-5 h-5 rounded-xl text-center text-custom-text-compare bg-custom-bg-span">
+              <div className="flex py-[10px] border-l-2 border-solid border-white-detail">
+                <span className="relative right-[11px] leading-[20px] inline-block w-5 h-5 rounded-xl text-center text-grey-label bg-white-detail">
                   -
                 </span>
-                <p className="mx-1 sm:mx-4 text-sm leading-6 text-custom-text-compare">
+                <p className="mx-1 sm:mx-4 text-sm leading-6 text-grey-label">
                   {payoutDetails.fee} {payoutDetails.baseCurrency}
                 </p>
-                <p className="text-[13px] sm:text-sm leading-6 text-custom-text-compare">
+                <p className="text-[13px] sm:text-sm leading-6 text-grey-label">
                   Transfer fee
                 </p>
               </div>
             </div>
             <div className="container pl-[18px]">
-              <div className="flex py-[10px] border-l-2 border-solid border-custom-bg-span">
-                <span className="relative right-[11px] leading-[20px] inline-block w-5 h-5 rounded-xl text-center text-custom-text-compare bg-custom-bg-span">
+              <div className="flex py-[10px] border-l-2 border-solid border-white-detail">
+                <span className="relative right-[11px] leading-[20px] inline-block w-5 h-5 rounded-xl text-center text-grey-label bg-white-detail">
                   =
                 </span>
-                <p className="mx-1 sm:mx-4 text-sm leading-6 text-custom-text-compare">
+                <p className="mx-1 sm:mx-4 text-sm leading-6 text-grey-label">
                   {payoutDetails.amountMinusFee} {payoutDetails.baseCurrency}
                 </p>
-                <p className="text-[13px] sm:text-sm leading-6 text-custom-text-compare">
+                <p className="text-[13px] sm:text-sm leading-6 text-grey-label">
                   Amount we’ll convert
                 </p>
               </div>
             </div>
             <div className="container pl-[18px]">
-              <div className="flex py-[10px] border-l-2 border-solid border-custom-bg-span">
-                <span className="relative leading-[20px] right-[11px] inline-block w-5 h-5 rounded-xl text-center text-custom-text-compare bg-custom-bg-span">
+              <div className="flex py-[10px] border-l-2 border-solid border-white-detail">
+                <span className="relative leading-[20px] right-[11px] inline-block w-5 h-5 rounded-xl text-center text-grey-label bg-white-detail">
                   x
                 </span>
-                <p className="mx-1 sm:mx-4 text-sm leading-6 text-custom-text-compare-bold">
+                <p className="mx-1 sm:mx-4 text-sm leading-6 text-blue-bold">
                   {payoutDetails.rate} {payoutDetails.baseCurrency}
                 </p>
-                <p className="text-[13px] sm:text-sm text-sm leading-6 font-medium text-custom-text-compare-bold">
+                <p className="text-[13px] sm:text-sm text-sm leading-6 font-medium text-blue-bold">
                   Guaranteed rate (1hr)
                 </p>
               </div>
@@ -353,7 +409,10 @@ const Amount = ({
             type="text"
             value={payoutDetails.convertedAmount}
             disabled
-            className={classes.input}
+            className={classes.input(
+              validationErrors.convertedAmount &&
+                validationErrors.convertedAmount.error
+            )}
           ></input>
           <ul className="dropdown__container">
             <li
@@ -387,7 +446,7 @@ const Amount = ({
                       id: "targetCurrency",
                       name: "USD",
                     });
-                    handleToggleTargetCurrency(e);
+                    handleToggleTargetCurrency();
                   }}
                   className="dropdown__list__item"
                   data-id="targetCurrency"
@@ -406,7 +465,7 @@ const Amount = ({
                       id: "targetCurrency",
                       name: "EUR",
                     });
-                    handleToggleTargetCurrency(e);
+                    handleToggleTargetCurrency();
                   }}
                   className="dropdown__list__item"
                   data-id="targetCurrency"
@@ -425,7 +484,7 @@ const Amount = ({
                       id: "targetCurrency",
                       name: "NGN",
                     });
-                    handleToggleTargetCurrency(e);
+                    handleToggleTargetCurrency();
                   }}
                   className="dropdown__list__item"
                   data-id="targetCurrency"
@@ -444,7 +503,7 @@ const Amount = ({
                       id: "targetCurrency",
                       name: "GBP",
                     });
-                    handleToggleTargetCurrency(e);
+                    handleToggleTargetCurrency();
                   }}
                   className="dropdown__list__item"
                   data-id="targetCurrency"

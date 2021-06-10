@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Payout from "../features/payout/payout";
 import NotFound from "../pages/notFound";
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
   return (
     <Router>
       <Switch>

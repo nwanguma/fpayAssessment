@@ -1,4 +1,4 @@
-const formatCurrency = (currency) => {
+const formatCurrency = (currency: string | number) => {
   if (currency === "") return currency;
 
   const currencyToNumber = +currency;

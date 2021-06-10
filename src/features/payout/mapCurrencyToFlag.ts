@@ -3,7 +3,7 @@ import ngn from "../../assets/images/ngr.svg";
 import eur from "../../assets/images/eur.svg";
 import usd from "../../assets/images/usd.svg";
 
-const mapCurrencyToFlag = (currency) => {
+const mapCurrencyToFlag = (currency: string): string => {
   const formattedCurrency = currency.toLowerCase();
 
   switch (formattedCurrency) {

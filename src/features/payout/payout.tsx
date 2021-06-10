@@ -4,18 +4,43 @@ import payoutReducer, { initialState } from "./payout-reducer";
 
 import { UPDATE_DETAILS } from "../../utils/types";
 
-import Confirmation from "./Confirmation";
-import Amount from "./Amount";
-import Recipient from "./Recipient";
+import PayoutConfirmation from "./PayoutConfirmation";
+import AmountDetails from "./AmountDetails";
+import RecipientDetails from "./RecipientDetails";
 
 import logo from "../../assets/images/logo.svg";
 import button from "../../assets/images/button.svg";
 
-const classes = {
+export interface Event {
+  target: {
+    name: string;
+    value: string | number;
+  };
+}
+
+export interface SubmitEvent {
+  preventDefault: () => void;
+}
+
+export interface ToggleData {
+  id: string;
+  name: string;
+}
+
+interface Classes {
+  "header-content": string;
+  steps: string;
+  "progress-bar": string;
+  indicator: (status: number) => string;
+  payoutStepsIndicator: (status: number, id: number) => string;
+  payoutStepsText: (status: number, id: number) => string;
+}
+
+const classes: Classes = {
   "header-content":
     "container w-[100%] md:w-[75%] mx-auto flex items-center py-6 justify-between",
   steps: "flex-1 mx-[5%] sm:mx-[5%] md:mx-[15%]",
-  "progress-bar": "bg-custom-bg-span mx-auto w-[76%] h-[2px]",
+  "progress-bar": "bg-white-detail mx-auto w-[76%] h-[2px]",
   indicator: (status) =>
     `${
       status === 1
@@ -34,15 +59,15 @@ const classes = {
       : "payout-steps__tab__text",
 };
 
-const Payout = () => {
+const Payout: React.FC = () => {
   const [payoutDetails, dispatch] = useReducer(payoutReducer, initialState);
   const [status, setStatus] = useState(1);
 
-  const handleOnChange = ({ target }) => {
+  const handleOnChange = (e: Event): void => {
     dispatch({
       type: UPDATE_DETAILS,
       payload: {
-        [target.name]: target.value,
+        [e.target.name]: e.target.value,
       },
     });
   };
@@ -51,7 +76,7 @@ const Payout = () => {
   Accessing dom attributes in handlers can be wonky, this is why I'm 
   passing the data object directly 
   */
-  const handleCurrencyToggle = (data) => {
+  const handleCurrencyToggle = (data: ToggleData): void => {
     dispatch({
       type: UPDATE_DETAILS,
       payload: {
@@ -60,13 +85,11 @@ const Payout = () => {
     });
   };
 
-  const handleProceed = () => {
+  const handleProceed = (): void => {
     setStatus(status + 1);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = (): void => {
     // console.log("Success");
   };
 
@@ -118,7 +141,7 @@ const Payout = () => {
       {
         {
           1: (
-            <Amount
+            <AmountDetails
               payoutDetails={payoutDetails}
               handleOnChange={handleOnChange}
               handleCurrencyToggle={handleCurrencyToggle}
@@ -126,17 +149,16 @@ const Payout = () => {
             />
           ),
           2: (
-            <Recipient
+            <RecipientDetails
               payoutDetails={payoutDetails}
               handleOnChange={handleOnChange}
               handleProceed={handleProceed}
             />
           ),
           3: (
-            <Confirmation
+            <PayoutConfirmation
               payoutDetails={payoutDetails}
-              handleOnChange={handleOnChange}
-              handleProceed={handleSubmit}
+              handleSubmit={handleSubmit}
             />
           ),
         }[status]

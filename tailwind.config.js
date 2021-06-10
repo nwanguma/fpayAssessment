@@ -12,30 +12,34 @@ module.exports = {
       "2xl": "1536px",
     },
     colors: {
-      custom: {
-        bg: {
-          light: "#FBFBFB",
-          grey: "#F2F2F2",
-          white: "#ffffff",
-          border: "#E8E8E8",
-          input: "#F4F3F8",
-          button: "#A98CF6",
-          span: "#EDEDED",
-        },
-        text: {
-          blue: "#2C0C6A",
-          grey: "#877E9E",
-          label: "#8B8F96",
-          white: "#ffffff",
-          button: "#A98CF6",
-          compare: "#8B8F96",
-          "compare-bold": "#372271",
-          tab: "#4305EB",
-          input2: "#C4C5C6",
-          currency: "#404040",
-          green: "#6FAE75",
-          "tab-active": "#636166",
-        },
+      white: {
+        main: "#ffffff",
+        off: "#fbfbfb",
+        border: "#f2f2f2",
+        "border-alt": "#e8e8e8",
+        bg: "#f4f3f8",
+        detail: "#ededed",
+      },
+      blue: {
+        text: "#2c0c6a",
+        button: "#A98CF6",
+        bold: "#372271",
+        tab: "#4305EB",
+      },
+      grey: {
+        light: "#C4C5C6",
+        text: "#877E9E",
+        label: "#8B8F96",
+        medium: "#404040",
+      },
+      green: {
+        button: "#6FAE75",
+      },
+      black: {
+        default: "#636166",
+      },
+      red: {
+        error: "#F25F7C",
       },
     },
     extend: {
