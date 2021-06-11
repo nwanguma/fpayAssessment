@@ -44,17 +44,14 @@ This project was bootstrapped with [create-react-app](https://create-react-app.d
 
 To install this project you need the following:
 
-1. yarn
-   Assuming you have node & npm installed you need to run
+1. Yarn - assuming you have node & npm installed you need to run
    `npm install yarn -g`
 
 2. A code editor
 
-3. Please install the stylelint extension, the src already includes the stylelint module and config file. For more information on why this is neccessary please read this [issue](https://github.com/tailwindlabs/discuss/issues/111)
+3. Please install the stylelint extension, the source code already includes the stylelint module and config file. For more information on why this is neccessary please read this [issue](https://github.com/tailwindlabs/discuss/issues/111)
 
 4. Sign up for a free API key on [fixer](https://fixer.io)
-
-5. Create env variable with the format REACT_APP_FIXER_API_KEY=yourapikey
 
 ### Installation
 
@@ -63,6 +60,8 @@ To install this project you need the following:
 
 2. Install packages
    `yarn install`
+
+3. Create env variable in the .env file in the project's root with the format REACT_APP_FIXER_API_KEY=yourapikey
 
 ### Development
 
